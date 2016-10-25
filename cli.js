@@ -5,9 +5,8 @@ const itunes = require('itunes-data');
 const moment = require('moment');
 const pathExists = require('path-exists');
 
-const config = fse.readJsonSync(`${os.homedir()}/.itunes/config.json`);
 const parser = itunes.parser();
-const stream = fse.createReadStream(config.itunesLibraryXmlPath);
+const stream = fse.createReadStream(`${os.homedir()}/Music/iTunes/iTunes Library.xml`);
 
 const current = [];
 
