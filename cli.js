@@ -33,9 +33,12 @@ stream.on('close', () => {
     const removed = cache.music.filter((x) => music.indexOf(x) < 0).filter(String);
 
     if (removed.length) {
-        fse.writeFileSync(`${os.homedir()}/.itunes/removed-${moment().format('YYYY-MM-DD@hh.mm.ssa')}.txt`, {
-            music: removed
-        });
+        fse.writeJSONSync(`${os.homedir()}/.itunes/removed-${moment().format('YYYY-MM-DD@hh.mm.ssa')}.json`, Object.assign(
+            defaults,
+            {
+                music: removed
+            }
+        ));
     }
 
     fse.writeJSONSync(cachePath, Object.assign(
