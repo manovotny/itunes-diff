@@ -17,18 +17,18 @@ parser.on('track', (track) => {
 });
 
 stream.on('close', () => {
-    const previousPath = `${os.homedir()}/.itunes/previous.txt`;
+    const cachePath = `${os.homedir()}/.itunes/cache.txt`;
 
-    if (pathExists.sync(previousPath)) {
-        const previous = fse.readFileSync(previousPath, {encoding: 'utf8'}).split('\n');
-        const removed = previous.filter((x) => current.indexOf(x) < 0);
+    if (pathExists.sync(cachePath)) {
+        const cache = fse.readFileSync(cachePath, {encoding: 'utf8'}).split('\n');
+        const removed = cache.filter((x) => current.indexOf(x) < 0);
 
         if (removed.length) {
             fse.writeFileSync(`${os.homedir()}/.itunes/removed-${moment().format('YYYY-MM-DD@hh.mm.ssa')}.txt`, removed.join('\n'));
         }
     }
 
-    fse.writeFileSync(previousPath, current.join('\n'));
+    fse.writeFileSync(cachePath, current.join('\n'));
 });
 
 stream.pipe(parser);
