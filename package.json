@@ -1,0 +1,29 @@
+{
+  "name": "itunes-diff",
+  "description": "TBD",
+  "version": "0.0.0",
+  "author": {
+    "name": "Michael Novotny",
+    "email": "manovotny@gmail.com",
+    "url": "htts://manovotny.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manovotny/itunes-diff.git"
+  },
+  "main": "cli.js",
+  "engines": {
+    "node": ">=6"
+  },
+  "scripts": {
+    "start": "node ./cli.js",
+    "test": "eslint . --ext .json --ext .js"
+  },
+  "dependencies": {
+    "fs-extra": "0.30.0",
+    "itunes-data": "0.1.3",
+    "moment": "2.15.2",
+    "path-exists": "3.0.0"
+  }
+}
