@@ -20,12 +20,16 @@ stream.on('close', () => {
     const cachePath = `${os.homedir()}/.itunes/cache.json`;
 
     if (!pathExists.sync(cachePath)) {
-        fse.writeJSONSync(cachePath, {
-            music: []
-        });
+        fse.writeJSONSync(cachePath, {});
     }
 
-    const cache = fse.readJSONSync(cachePath);
+    const defaults = {
+        music: []
+    };
+    const cache = Object.assign(
+        defaults,
+        fse.readJSONSync(cachePath)
+    );
     const removed = cache.music.filter((x) => music.indexOf(x) < 0).filter(String);
 
     if (removed.length) {
@@ -34,9 +38,12 @@ stream.on('close', () => {
         });
     }
 
-    fse.writeJSONSync(cachePath, {
-        music: music
-    });
+    fse.writeJSONSync(cachePath, Object.assign(
+        defaults,
+        {
+            music
+        }
+    ));
 });
 
 stream.pipe(parser);
